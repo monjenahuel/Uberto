@@ -1,0 +1,38 @@
+import wollok.game.*
+import autoPlayer.*
+import EstacionDeServicio.*
+
+program juegoAutos {
+	
+	// límites del juego
+	game.width(15)
+	game.height(15)
+	
+	// fondo
+	//game.boardGround("parking lot.png")
+	
+	// personaje principal
+	
+	game.addVisual(stats)
+	
+	// que arranque el juego!
+	const eds = new EstacionDeServicio()
+	game.addVisual(eds)
+	
+	game.addVisualCharacter(autoJugador)
+	game.showAttributes(autoJugador)
+	
+	keyboard.up().onPressDo{autoJugador.avanzar("arriba") }
+	keyboard.down().onPressDo{autoJugador.avanzar("abajo") }
+	keyboard.left().onPressDo{autoJugador.avanzar("izq") }
+	keyboard.right().onPressDo{autoJugador.avanzar("der") }
+	
+	
+	game.onCollideDo(autoJugador, { e => keyboard.c().onPressDo{e.venderCombustible() }})
+	game.onCollideDo(eds, { e => game.say(eds, eds.mensaje())})
+	
+	game.start()
+	
+	
+	
+}
