@@ -6,16 +6,18 @@ object autoJugador {
 	var property pasosDelPasajeroAlDestino = 0
 	var property pasajeroActual = null
 	var property gananciasTotales = 100
-	var property combustible = 5
+	var property combustible = 50
 	var property ultimaDireccion = null
 	
 	method avanzar(direccion){
 		ultimaDireccion = direccion
+		pasosDelPasajeroAlDestino += 1
 		if (combustible == 0){
 			game.removeVisual(self)
 			game.addVisual(autoParado)
 			game.addVisual(gameOver)
-			autoParado.error("Uh, me quedé sin nafta")	
+			autoParado.error("Uh, me quedé sin nafta")
+			game.schedule(2000, {game.stop()})	
 			
 		}
 		if (combustible >= 1){
@@ -36,7 +38,17 @@ object autoJugador {
 	}
 	
 	method subirPasajero(pasajero){
+		pasosDelPasajeroAlDestino = 0
 		pasajeroActual = pasajero
+		pasajero.destino().mostrarDestino()
+		game.removeVisual(pasajero)
+		
+	}
+	
+	method bajarPasajero(pasajero){
+		pasajeroActual = null
+		pasajero.abonarViaje(self)
+		
 	}
 	
 	method recibirCobro(monto){
@@ -48,6 +60,19 @@ object autoJugador {
 		combustible += litros
 		gananciasTotales -= litros
 	}
+	
+	method objetoColisionante()=
+		if(game.colliders(self).size() == 1)
+			game.uniqueCollider(self)
+		else
+			null
+
+	method interactuarCon(objeto) {
+		if (self.objetoColisionante() != null)
+			objeto.interactuar(self)
+	}
+	
+	
 	
 	
 }

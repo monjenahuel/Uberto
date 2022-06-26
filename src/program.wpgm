@@ -1,26 +1,33 @@
 import wollok.game.*
 import autoPlayer.*
 import EstacionDeServicio.*
+import Pasajeros.*
 
 program juegoAutos {
 	
 	// límites del juego
 	game.width(15)
 	game.height(15)
+	game.cellSize(64)
 	
 	// fondo
 	//game.boardGround("parking lot.png")
-	
+	//game.ground("Calle2.png")
 	// personaje principal
 	
 	game.addVisual(stats)
 	
 	// que arranque el juego!
 	const eds = new EstacionDeServicio()
+	const d1 = new Destino(position=game.at(10,10))
+	const p1 = new Pasajero(dineroDisponible=20,destino = d1)
 	game.addVisual(eds)
-	
+	game.addVisual(p1)
+	game.addVisual(d1)
 	game.addVisualCharacter(autoJugador)
 	game.showAttributes(autoJugador)
+	game.showAttributes(p1)
+	game.showAttributes(d1)
 	
 	keyboard.up().onPressDo{autoJugador.avanzar("arriba") }
 	keyboard.down().onPressDo{autoJugador.avanzar("abajo") }
@@ -28,8 +35,15 @@ program juegoAutos {
 	keyboard.right().onPressDo{autoJugador.avanzar("der") }
 	
 	
-	game.onCollideDo(autoJugador, { e => keyboard.c().onPressDo{e.venderCombustible() }})
-	game.onCollideDo(eds, { e => game.say(eds, eds.mensaje())})
+	//game.onCollideDo(autoJugador, { e => keyboard.c().onPressDo{e.venderCombustible() }})
+	
+	game.onCollideDo(autoJugador, { e => game.say(e, e.mensaje())})
+	
+	//game.onCollideDo(p1,{j => keyboard.x().onPressDo{j.subirPasajero(p1)}})
+	
+	//game.onCollideDo(d1,{j => keyboard.v().onPressDo{j.bajarPasajero(p1)}})
+	
+	keyboard.z().onPressDo{autoJugador.interactuarCon(autoJugador.objetoColisionante())}
 	
 	game.start()
 	
