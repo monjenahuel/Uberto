@@ -1,4 +1,5 @@
 import wollok.game.*
+import config.*
 
 object autoJugador {
 	var property image = "AutoAzulDerecha.png"
@@ -8,6 +9,7 @@ object autoJugador {
 	var property gananciasTotales = 100
 	var property combustible = 50
 	var property ultimaDireccion = null
+	var property vida = 100
 	
 	method avanzar(direccion){
 		ultimaDireccion = direccion
@@ -104,13 +106,30 @@ object autoParado{
 object stats{
 	method text()= 
 		return "Nafta: " + autoJugador.combustible() + "    " + "Dinero: " + autoJugador.gananciasTotales()
+		+ "  " + "Vida: " + autoJugador.vida()
 		
 	method position()= game.at(12,0)
 	
 }
 
-object gameOver{
-	method image()= "GameOver.png"
-	method position()= game.at(4,8)
-	
-}
+object autoPrueba{
+	var property image = "AutoAzulArriba.png"
+    var property position = game.at(3, 5)
+
+    method movete() {
+
+
+    		  	const x =1.randomUpTo(4).roundUp()
+			    const y = autoJugador.position().y() 
+			    // otra forma de generar números aleatorios
+			    // const x = (0.. game.width()-1).anyOne() 
+			    // const y = (0.. game.height()-1).anyOne() 
+			    position = game.at(x,y)
+    	}
+
+
+
+
+  }
+
+
