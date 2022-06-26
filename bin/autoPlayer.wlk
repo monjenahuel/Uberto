@@ -10,7 +10,7 @@ object autoJugador {
 	var property combustible = 50
 	var property ultimaDireccion = null
 	var property vida = 100
-	
+
 	method avanzar(direccion){
 		ultimaDireccion = direccion
 		pasosDelPasajeroAlDestino += 1
@@ -20,7 +20,7 @@ object autoJugador {
 			game.addVisual(gameOver)
 			autoParado.error("Uh, me quedé sin nafta")
 			game.schedule(2000, {game.stop()})	
-      
+			
 		}
 		if (combustible >= 1){
 			self.rotar(direccion)
@@ -119,19 +119,19 @@ object autoParado{
 
 object stats{
 	method text()= 
-		return "Nafta: " + autoJugador.combustible() + "    " + "Dinero: " + autoJugador.gananciasTotales() 
+		return "Nafta: " + autoJugador.combustible() + "    " + "Dinero: " + autoJugador.gananciasTotales()
 		+ "  " + "Vida: " + autoJugador.vida()
 		
-	method position()= game.at(11,0)
+	method position()= game.at(12,0)
 	
 }
+
 
 object autoPrueba{
 	var property image = "AutoAzulArriba.png"
     var property position = game.at(3, 5)
 
     method movete() {
-
 
     		  	const x =1.randomUpTo(4).roundUp()
 			    const y = autoJugador.position().y() 
@@ -140,6 +140,6 @@ object autoPrueba{
 			    // const y = (0.. game.height()-1).anyOne() 
 			    position = game.at(x,y)
     	}
-}
+  }
 
 

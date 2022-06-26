@@ -2,6 +2,7 @@ import wollok.game.*
 import autoPlayer.*
 import EstacionDeServicio.*
 import Pasajeros.*
+
 import config.*
 
 program juegoAutos {
@@ -21,7 +22,6 @@ program juegoAutos {
 
 	nivel1.inicio()
 
-	
 	
 	game.start()
 	
