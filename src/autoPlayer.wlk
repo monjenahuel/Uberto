@@ -8,6 +8,8 @@ object autoJugador {
 	var property gananciasTotales = 100
 	var property combustible = 5
 	var property ultimaDireccion = null
+	var property vida = 100
+	
 	
 	method avanzar(direccion){
 		ultimaDireccion = direccion
@@ -16,11 +18,16 @@ object autoJugador {
 			game.addVisual(autoParado)
 			game.addVisual(gameOver)
 			autoParado.error("Uh, me quedé sin nafta")	
-			
 		}
 		if (combustible >= 1){
 			self.rotar(direccion)
 			combustible = 0.max(combustible - 1)}
+		if(self.chocaConAuto()){
+			
+			vida = 0.max(vida-10)
+			
+			
+		}
 	}
 	
 	method rotar(direccion){
@@ -50,6 +57,13 @@ object autoJugador {
 	}
 	
 	
+	
+	method chocaConAuto(){
+		return position == autoPrueba.position() 
+		
+	}
+	
+	
 }
 
 object autoParado{
@@ -71,6 +85,7 @@ object autoParado{
 		}else{
 			return autoJugador.position()
 		}
+
 }
 
 
@@ -78,7 +93,8 @@ object autoParado{
 
 object stats{
 	method text()= 
-		return "Nafta: " + autoJugador.combustible() + "    " + "Dinero: " + autoJugador.gananciasTotales()
+		return "Nafta: " + autoJugador.combustible() + "    " + "Dinero: " + autoJugador.gananciasTotales() 
+		+ "  " + "Vida: " + autoJugador.vida()
 		
 	method position()= game.at(12,0)
 	
@@ -89,3 +105,34 @@ object gameOver{
 	method position()= game.at(4,8)
 	
 }
+
+
+object autoPrueba{
+	var property image = "AutoAzulArriba.png"
+    var property position = game.at(3, 5)
+    
+    method movete() {
+    	
+    	
+    		  	const x =1.randomUpTo(4).roundUp()
+			    const y = autoJugador.position().y() 
+			    // otra forma de generar números aleatorios
+			    // const x = (0.. game.width()-1).anyOne() 
+			    // const y = (0.. game.height()-1).anyOne() 
+			    position = game.at(x,y)
+    	}
+    	
+
+	
+   
+  }
+  
+  
+	
+		
+
+    
+    
+ 
+  
+ 

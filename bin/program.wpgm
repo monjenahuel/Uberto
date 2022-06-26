@@ -1,9 +1,12 @@
 import wollok.game.*
 import autoPlayer.*
 import EstacionDeServicio.*
+import config.*
 
 program juegoAutos {
 	
+	
+	//nivel.inicio()
 	// límites del juego
 	game.width(15)
 	game.height(15)
@@ -19,13 +22,19 @@ program juegoAutos {
 	const eds = new EstacionDeServicio()
 	game.addVisual(eds)
 	
+	
+	
 	game.addVisualCharacter(autoJugador)
 	game.showAttributes(autoJugador)
 	
-	keyboard.up().onPressDo{autoJugador.avanzar("arriba") }
-	keyboard.down().onPressDo{autoJugador.avanzar("abajo") }
-	keyboard.left().onPressDo{autoJugador.avanzar("izq") }
-	keyboard.right().onPressDo{autoJugador.avanzar("der") }
+	
+	game.addVisual(autoPrueba)
+	///game.whenCollideDo(autoJugador, {elemento  => elemento.subir()})
+	
+	
+	config.configurarTeclas()
+	
+	game.onTick(1000, "movimiento", { autoPrueba.movete() })
 	
 	
 	game.onCollideDo(autoJugador, { e => keyboard.c().onPressDo{e.venderCombustible() }})
