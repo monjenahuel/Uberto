@@ -4,8 +4,10 @@ import EstacionDeServicio.*
 import Pasajeros.*
 
 
+
 object config {
 	//Configuracion de volumen y teclas, además tiene el metodo revisarColision y guarda el nivel actual en el que esta el juego
+
 
 	method configurarTeclas() {
 		keyboard.up().onPressDo{autoJugador.avanzar("arriba") }
@@ -37,6 +39,7 @@ object gameOver{
 class Nivel{
 	const anchoTotal = 15
 	const altoTotal = 15
+
 	
 	method inicio(){
 		game.clear()

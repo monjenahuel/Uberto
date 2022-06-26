@@ -6,6 +6,8 @@ import config.*
 
 program juegoAutos {
 	
+	
+	//nivel.inicio()
 	// límites del juego
 	game.width(15)
 	game.height(15)
@@ -16,7 +18,9 @@ program juegoAutos {
 	//game.ground("Calle2.png")
 	// personaje principal
 	
+
 	nivel1.inicio()
+
 	
 	
 	game.start()

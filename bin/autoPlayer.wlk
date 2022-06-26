@@ -20,11 +20,17 @@ object autoJugador {
 			game.addVisual(gameOver)
 			autoParado.error("Uh, me quedé sin nafta")
 			game.schedule(2000, {game.stop()})	
-			
+      
 		}
 		if (combustible >= 1){
 			self.rotar(direccion)
 			combustible = 0.max(combustible - 1)}
+		if(self.chocaConAuto()){
+			
+			vida = 0.max(vida-10)
+			
+			
+		}
 	}
 	
 	method rotar(direccion){
@@ -77,6 +83,13 @@ object autoJugador {
 	
 	
 	
+	
+	method chocaConAuto(){
+		return position == autoPrueba.position() 
+		
+	}
+	
+	
 }
 
 object autoParado{
@@ -98,6 +111,7 @@ object autoParado{
 		}else{
 			return autoJugador.position()
 		}
+
 }
 
 
@@ -105,10 +119,10 @@ object autoParado{
 
 object stats{
 	method text()= 
-		return "Nafta: " + autoJugador.combustible() + "    " + "Dinero: " + autoJugador.gananciasTotales()
+		return "Nafta: " + autoJugador.combustible() + "    " + "Dinero: " + autoJugador.gananciasTotales() 
 		+ "  " + "Vida: " + autoJugador.vida()
 		
-	method position()= game.at(12,0)
+	method position()= game.at(11,0)
 	
 }
 
@@ -126,10 +140,6 @@ object autoPrueba{
 			    // const y = (0.. game.height()-1).anyOne() 
 			    position = game.at(x,y)
     	}
-
-
-
-
-  }
+}
 
 
