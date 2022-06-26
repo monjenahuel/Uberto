@@ -1,4 +1,5 @@
 import wollok.game.*
+import config.*
 
 object autoJugador {
 	var property image = "AutoAzulDerecha.png"
@@ -6,18 +7,20 @@ object autoJugador {
 	var property pasosDelPasajeroAlDestino = 0
 	var property pasajeroActual = null
 	var property gananciasTotales = 100
-	var property combustible = 5
+	var property combustible = 50
 	var property ultimaDireccion = null
 	var property vida = 100
 	
-	
 	method avanzar(direccion){
 		ultimaDireccion = direccion
+		pasosDelPasajeroAlDestino += 1
 		if (combustible == 0){
 			game.removeVisual(self)
 			game.addVisual(autoParado)
 			game.addVisual(gameOver)
-			autoParado.error("Uh, me quedé sin nafta")	
+			autoParado.error("Uh, me quedé sin nafta")
+			game.schedule(2000, {game.stop()})	
+      
 		}
 		if (combustible >= 1){
 			self.rotar(direccion)
@@ -43,7 +46,17 @@ object autoJugador {
 	}
 	
 	method subirPasajero(pasajero){
+		pasosDelPasajeroAlDestino = 0
 		pasajeroActual = pasajero
+		pasajero.destino().mostrarDestino()
+		game.removeVisual(pasajero)
+		
+	}
+	
+	method bajarPasajero(pasajero){
+		pasajeroActual = null
+		pasajero.abonarViaje(self)
+		
 	}
 	
 	method recibirCobro(monto){
@@ -55,6 +68,19 @@ object autoJugador {
 		combustible += litros
 		gananciasTotales -= litros
 	}
+	
+	method objetoColisionante()=
+		if(game.colliders(self).size() == 1)
+			game.uniqueCollider(self)
+		else
+			null
+
+	method interactuarCon(objeto) {
+		if (self.objetoColisionante() != null)
+			objeto.interactuar(self)
+	}
+	
+	
 	
 	
 	
@@ -96,24 +122,17 @@ object stats{
 		return "Nafta: " + autoJugador.combustible() + "    " + "Dinero: " + autoJugador.gananciasTotales() 
 		+ "  " + "Vida: " + autoJugador.vida()
 		
-	method position()= game.at(12,0)
+	method position()= game.at(11,0)
 	
 }
-
-object gameOver{
-	method image()= "GameOver.png"
-	method position()= game.at(4,8)
-	
-}
-
 
 object autoPrueba{
 	var property image = "AutoAzulArriba.png"
     var property position = game.at(3, 5)
-    
+
     method movete() {
-    	
-    	
+
+
     		  	const x =1.randomUpTo(4).roundUp()
 			    const y = autoJugador.position().y() 
 			    // otra forma de generar números aleatorios
@@ -121,18 +140,6 @@ object autoPrueba{
 			    // const y = (0.. game.height()-1).anyOne() 
 			    position = game.at(x,y)
     	}
-    	
+}
 
-	
-   
-  }
-  
-  
-	
-		
 
-    
-    
- 
-  
- 
