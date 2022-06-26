@@ -140,6 +140,14 @@ object autoPrueba{
 			    // const y = (0.. game.height()-1).anyOne() 
 			    position = game.at(x,y)
     	}
+    	
+    method mensaje(){
+    	if (autoJugador.chocaConAuto()){
+			return "Me chocaste con el auto, tu vida total es " + autoJugador.vida()
+		}else{
+			return ""
+		}
+		}
   }
 
 
