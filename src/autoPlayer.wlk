@@ -137,11 +137,13 @@ object stats{
 
 
 object autoPrueba{
-	var property image = "AutoAzulArriba.png"
+	var property image = "TaxiArriba.png"
     var property position = game.at(3, 5)
-
+	
+	const property imagenes = ["TaxiArriba.png","TaxiAbajo.png","TaxiIzquierda.png","TaxiDerecha.png"]
+	
     method movete() {
-
+				image = imagenes.anyOne()
     		  	const x =1.randomUpTo(4).roundUp()
 			    const y = autoJugador.position().y() 
 			    // otra forma de generar números aleatorios
