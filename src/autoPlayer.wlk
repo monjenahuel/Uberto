@@ -21,6 +21,7 @@ object autoJugador {
 			autoParado.error("Uh, me quedé sin nafta")
 			game.schedule(2000, {game.stop()})	
 			
+
 		}
 		if (combustible >= 1){
 			self.rotar(direccion)
@@ -89,6 +90,14 @@ object autoJugador {
 		
 	}
 	
+	method reiniciarJuego() {
+		nivel1.inicio()
+		game.say(self,"¡Esta vez lo hare mejor!")
+		position = game.origin()
+		combustible = 60
+		
+	}
+	
 	
 }
 
@@ -143,7 +152,7 @@ object autoPrueba{
     	
     method mensaje(){
     	if (autoJugador.chocaConAuto()){
-			return "Me chocaste con el auto, tu vida total es " + autoJugador.vida()
+			return "Me chocaste con el auto, tu vida total es " + (autoJugador.vida() -10)
 		}else{
 			return ""
 		}

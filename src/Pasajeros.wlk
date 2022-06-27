@@ -1,5 +1,6 @@
 import autoPlayer.*
 import wollok.game.*
+import config.*
 
 class Pasajero {
 	var property destino // Destino()
@@ -19,12 +20,17 @@ class Pasajero {
 		self.bajarDelAuto()
 	}
 	
+	method personaEnDestino() = nivel1.destinos().any{ undestino => undestino.position() == self.position() }
+	
 	method bajarDelAuto(){
+		self.personaEnDestino()
 		position = destino.position()
 		game.addVisual(self)
 		game.schedule(2000, {game.removeVisual(self)})
 		game.schedule(2000, {game.removeVisual(destino)})
 	}
+	
+	
 	
 	method mensaje(){
 		if (position != destino.position()) {
