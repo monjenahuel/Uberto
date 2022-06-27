@@ -19,6 +19,7 @@ object autoJugador {
 			game.addVisual(autoParado)
 			game.addVisual(gameOver)
 			autoParado.error("Uh, me quedé sin nafta")
+			
 			game.schedule(2000, {game.stop()})	
 			
 
@@ -90,7 +91,14 @@ object autoJugador {
 		
 	}
 	
+	method reiniciarPosicion() {
+		position = game.origin()
+	}
+	
+	method masCombustible(){}
+	
 	method reiniciarJuego() {
+		
 		nivel1.inicio()
 		game.say(self,"¡Esta vez lo hare mejor!")
 		position = game.origin()

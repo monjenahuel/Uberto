@@ -6,8 +6,11 @@ class Pasajero {
 	var property destino // Destino()
 	var property dineroDisponible // Int
 	var property position = game.at(5,5)
+	
 	const property image = "pasajero1.png"
 	var property costoDelUltimoViaje = 0
+	
+
 	
 	method interactuar(auto){
 		auto.subirPasajero(self)

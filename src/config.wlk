@@ -55,7 +55,7 @@ class Nivel{
 		game.title("El laburante del Uber")
 		game.width(anchoTotal)
 		game.height(altoTotal)
-		self.siguienteNivel(siguienteNivel)
+		
 		config.configurarTeclas()
 		//game.boardGround("uber.png")		
 	}
@@ -65,20 +65,17 @@ class Nivel{
 	
 }
 
+
+
+
 object nivel1 inherits Nivel(siguienteNivel = nivel2){
 	
-	
-	const eds = new EstacionDeServicio()
-	/*const d1 = new Destino(position=game.at(7,7))
-	const p1 = new Pasajero(dineroDisponible=20,destino = d1)*/
-	
-	const d2 = new Destino(position=game.at(8,8))
-	/*const p2 = new Pasajero(dineroDisponible=50,destino = d2)*/
+
 	
 	
 	
-	method crearPasajero(x, y,dinero,destino){pasajeros.add(new Pasajero(dineroDisponible = dinero,position = game.at(x, y), destino = destino))}
-	
+	//method crearPasajero(x, y,dinero,destino){pasajeros.add(new Pasajero(dineroDisponible = dinero,position = game.at(x, y), posicionInicial =, destino = destino))}
+	/* 
 	method crearDestino(x, y) {
 		destinos.add(new Destino(position = game.at(x, y)))
 	}
@@ -90,28 +87,51 @@ object nivel1 inherits Nivel(siguienteNivel = nivel2){
 		self.elementosDelNivel().forEach{ unElemento => game.showAttributes(unElemento)}
 	}
 	
+	method eliminarElementos() {
+		self.elementosDelNivel().forEach{ unElemento => game.removeVisual(unElemento)}
+		pasajeros.clear()
+	}
 	
+	method reiniciarPosicion() {
+		pasajeros.forEach({ p => p.reiniciarPosicion()})
+	}
+	
+	method reiniciarJuego() {
+	
+		self.inicio()
+		nivel1.reiniciarPosicion()
+		game.say(autoJugador,"¡Esta vez lo hare mejor!")
+		autoJugador.reiniciarPosicion()
+		autoJugador.masCombustible()
+	}
+	
+	*/
 	
 	
 	override method inicio(){
 		
 		super()
+		
+			
+		const eds = new EstacionDeServicio()
+		const d1 = new Destino(position=game.at(7,7))
+		const p1 = new Pasajero(dineroDisponible=20,destino = d1)
+
+		
 		game.addVisual(stats)
 		
-		self.crearPasajero(5,6, 7,d2)
+		//self.crearPasajero(5,6, 7,d2)
 		
-		self.cargarElementos()
+		//self.cargarElementos()
 		game.addVisual(eds)
-		//game.addVisual(p1)
-		//game.addVisual(d1)
-		//game.addVisual(p2)
-		game.addVisual(d2)
+		game.addVisual(p1)
+		game.addVisual(d1)
+
 		game.addVisualCharacter(autoJugador)
 		game.showAttributes(autoJugador)
-		//game.showAttributes(p1)
-		//game.showAttributes(d1)
-		//game.showAttributes(p2)
-		game.showAttributes(d2)
+		game.showAttributes(p1)
+		game.showAttributes(d1)
+		
 		game.addVisual(autoPrueba)
 		
 		colisiones.configurar()	
