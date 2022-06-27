@@ -33,7 +33,7 @@ object colisiones{
 }
 
 object gameOver{
-	method image()= "GameOver.png"
+	method image()= "GameOver2.png"
 	method position()= game.at(4,8)
 	
 }
