@@ -18,13 +18,11 @@ program juegoAutos {
 	//game.boardGround("parking lot.png")
 	//game.ground("Calle2.png")
 	// personaje principal
+	menu.inicio()
 	
-
-	nivel1.inicio()
-
 	
+	//nivel1.inicio()
+
 	game.start()
-	
-	
 	
 }

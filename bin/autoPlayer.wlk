@@ -10,6 +10,18 @@ object autoJugador {
 	var property combustible = 50
 	var property ultimaDireccion = null
 	var property vida = 100
+	const property posicionInicial = position
+	
+	
+	var property nivelActual = menu
+	
+	method inicializarAuto(){
+		pasosDelPasajeroAlDestino = 0
+		combustible = 20
+		vida = 100
+		gananciasTotales = 0
+		
+	}
 
 	method avanzar(direccion){
 		ultimaDireccion = direccion
@@ -91,20 +103,7 @@ object autoJugador {
 		
 	}
 	
-	method reiniciarPosicion() {
-		position = game.origin()
-	}
 	
-	method masCombustible(){}
-	
-	method reiniciarJuego() {
-		
-		nivel1.inicio()
-		game.say(self,"¡Esta vez lo hare mejor!")
-		position = game.origin()
-		combustible = 60
-		
-	}
 	
 	
 }
@@ -135,24 +134,30 @@ object autoParado{
 }
 
 object stats{
+	var property position= game.at(10,0)
+	
+	const property posicionInicial = self.position()
+	
 	method text()= 
 		return "Nafta: " + autoJugador.combustible() + "    " + "Dinero: " + autoJugador.gananciasTotales()
 		+ "  " + "Vida: " + autoJugador.vida()
 		
-	method position()= game.at(12,0)
+	
 	
 }
 
 
 object autoPrueba{
 	var property image = "TaxiArriba.png"
-    var property position = game.at(3, 5)
+    var property position = game.at(1.randomUpTo(15),1.randomUpTo(15))
+    const property posicionInicial = position
+    
 	
 	const property imagenes = ["TaxiArriba.png","TaxiAbajo.png","TaxiIzquierda.png","TaxiDerecha.png"]
 	
     method movete() {
 				image = imagenes.anyOne()
-    		  	const x =1.randomUpTo(4).roundUp()
+    		  	const x = 1.randomUpTo(4).roundUp()
 			    const y = autoJugador.position().y() 
 			    // otra forma de generar números aleatorios
 			    // const x = (0.. game.width()-1).anyOne() 

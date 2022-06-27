@@ -4,6 +4,7 @@ import wollok.game.*
 class EstacionDeServicio {
 	const property image = "nafta2.png"
 	var property position = game.origin()//game.at(2,2)
+	const property posicionInicial = position
 	
 	
 	method interactuar(auto){

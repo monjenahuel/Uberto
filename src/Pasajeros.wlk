@@ -6,7 +6,7 @@ class Pasajero {
 	var property destino // Destino()
 	var property dineroDisponible // Int
 	var property position = game.at(5,5)
-	
+	const property posicionInicial = position
 	const property image = "pasajero1.png"
 	var property costoDelUltimoViaje = 0
 	
@@ -50,7 +50,8 @@ class Pasajero {
 
 class Destino{
 	var property image = "null.png"
-	const property position
+	var property position
+	const property posicionInicial = position
 	
 	method mostrarDestino(){
 		image = "Pixel.png"

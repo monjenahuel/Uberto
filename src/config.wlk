@@ -5,9 +5,11 @@ import Pasajeros.*
 
 
 
+
 object config {
 	//Configuracion de volumen y teclas, además tiene el metodo revisarColision y guarda el nivel actual en el que esta el juego
-
+	
+	const niveles =[menu,nivel1,nivel2,nivel3]
 
 	method configurarTeclas() {
 		keyboard.up().onPressDo{autoJugador.avanzar("arriba") }
@@ -17,14 +19,36 @@ object config {
 	
 		keyboard.z().onPressDo{autoJugador.interactuarCon(autoJugador.objetoColisionante())}
 		
+		keyboard.r().onPressDo{self.reiniciarJuego(autoJugador.nivelActual())}
 		
-		keyboard.r().onPressDo{autoJugador.reiniciarJuego()}
 		
+		keyboard.s().onPressDo{self.pasarDeNivel()}
 		
 	}
+	
+	method nivelSiguiente(){
+		return autoJugador.nivelActual().siguienteNivel()
+	}
+	
+	method pasarDeNivel(){
+		
+		self.nivelSiguiente().inicio()
+		self.nivelSiguiente().reiniciar()
+		autoJugador.nivelActual(self.nivelSiguiente())
+	}
+	
+	method reiniciarJuego(nivel) {
+		nivel.reiniciar()	
+	}
+	
+	
+
+	
 }
 
 object colisiones{
+	
+	
 	method configurar(){
 		game.onCollideDo(autoJugador, { e => game.say(e, e.mensaje())})
 		game.onTick(1000, "movimiento", { autoPrueba.movete() })
@@ -57,9 +81,37 @@ class Nivel{
 		game.height(altoTotal)
 		
 		config.configurarTeclas()
-		//game.boardGround("uber.png")		
+		
 	}
 	
+	method reiniciarPosiciones(){
+		game.allVisuals().forEach({elemento => elemento.position(elemento.posicionInicial() ) } )
+	}
+	
+	
+	
+	method reiniciar(){
+		self.inicio()
+		self.reiniciarPosiciones()
+		autoJugador.inicializarAuto()
+	}
+	
+	
+	
+	
+	
+}
+
+object menu inherits Nivel(siguienteNivel = nivel1){
+	
+	method image() = "caja.png"
+	method position() = game.center()
+	
+	override method inicio(){
+		super()
+		
+		game.addVisual(self)
+	}
 	
 	
 	
@@ -67,12 +119,7 @@ class Nivel{
 
 
 
-
 object nivel1 inherits Nivel(siguienteNivel = nivel2){
-	
-
-	
-	
 	
 	//method crearPasajero(x, y,dinero,destino){pasajeros.add(new Pasajero(dineroDisponible = dinero,position = game.at(x, y), posicionInicial =, destino = destino))}
 	/* 
@@ -111,11 +158,10 @@ object nivel1 inherits Nivel(siguienteNivel = nivel2){
 	override method inicio(){
 		
 		super()
-		
 			
-		const eds = new EstacionDeServicio()
-		const d1 = new Destino(position=game.at(7,7))
-		const p1 = new Pasajero(dineroDisponible=20,destino = d1)
+		var eds = new EstacionDeServicio()
+		var d1 = new Destino(position=game.at(7,7))
+		var p1 = new Pasajero(dineroDisponible=20,destino = d1)
 
 		
 		game.addVisual(stats)
@@ -128,9 +174,9 @@ object nivel1 inherits Nivel(siguienteNivel = nivel2){
 		game.addVisual(d1)
 
 		game.addVisualCharacter(autoJugador)
+
 		game.showAttributes(autoJugador)
-		game.showAttributes(p1)
-		game.showAttributes(d1)
+
 		
 		game.addVisual(autoPrueba)
 		
@@ -138,6 +184,9 @@ object nivel1 inherits Nivel(siguienteNivel = nivel2){
 		
 		
 	}
+	
+	
+	
 	/* 
 	method noHayPasajeros(){
 		return game.removeVisual(p1)
@@ -160,15 +209,18 @@ object nivel1 inherits Nivel(siguienteNivel = nivel2){
 
 
 
-object nivel2 inherits Nivel(siguienteNivel = nivel1){
-	
-	const esd = new EstacionDeServicio()
-	const d2 = new Destino(position=game.at(8,8))
-	const p2 = new Pasajero(dineroDisponible=50,destino = d2)
+object nivel2 inherits Nivel(siguienteNivel = nivel3){
+
 	
 	override method inicio(){
 		
 		super()
+		
+			
+		const esd = new EstacionDeServicio()
+		const d2 = new Destino(position=game.at(8,8))
+		const p2 = new Pasajero(position=game.at(2,3),dineroDisponible=50,destino = d2)
+		
 		game.addVisual(stats)
 		
 		game.addVisual(esd)
@@ -191,3 +243,47 @@ object nivel2 inherits Nivel(siguienteNivel = nivel1){
 	
 }
 
+object nivel3 inherits Nivel(siguienteNivel = creditos){
+
+	
+	override method inicio(){
+		
+		super()
+		
+			
+		const esd = new EstacionDeServicio()
+		const d2 = new Destino(position=game.at(8,8))
+		const p2 = new Pasajero(position=game.at(2,3),dineroDisponible=50,destino = d2)
+		
+		game.addVisual(stats)
+		
+		game.addVisual(esd)
+		game.addVisual(p2)
+		game.addVisual(d2)
+		game.addVisualCharacter(autoJugador)
+		game.showAttributes(autoJugador)
+		game.showAttributes(p2)
+		game.showAttributes(d2)
+		game.addVisual(autoPrueba)
+		
+		colisiones.configurar()	
+		
+
+	}
+	
+	
+}
+
+
+object creditos inherits Nivel(siguienteNivel = null){
+	method image() = "caja.png"
+	method position() = game.center()
+	
+	override method inicio(){
+		super()
+		
+		game.addVisual(self)
+	}
+	
+	
+}
