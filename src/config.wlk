@@ -121,63 +121,56 @@ object menu inherits Nivel(siguienteNivel = nivel1){
 
 object nivel1 inherits Nivel(siguienteNivel = nivel2){
 	
-	//method crearPasajero(x, y,dinero,destino){pasajeros.add(new Pasajero(dineroDisponible = dinero,position = game.at(x, y), posicionInicial =, destino = destino))}
-	/* 
-	method crearDestino(x, y) {
-		destinos.add(new Destino(position = game.at(x, y)))
-	}
-	
-	method elementosDelNivel() = [ pasajeros, destinos ].flatten()
-	
-	method cargarElementos() {
-		self.elementosDelNivel().forEach{ unElemento => game.addVisual(unElemento)}
-		self.elementosDelNivel().forEach{ unElemento => game.showAttributes(unElemento)}
-	}
-	
-	method eliminarElementos() {
-		self.elementosDelNivel().forEach{ unElemento => game.removeVisual(unElemento)}
-		pasajeros.clear()
-	}
-	
-	method reiniciarPosicion() {
-		pasajeros.forEach({ p => p.reiniciarPosicion()})
-	}
-	
-	method reiniciarJuego() {
-	
-		self.inicio()
-		nivel1.reiniciarPosicion()
-		game.say(autoJugador,"¡Esta vez lo hare mejor!")
-		autoJugador.reiniciarPosicion()
-		autoJugador.masCombustible()
-	}
-	
-	*/
 	
 	
 	override method inicio(){
 		
 		super()
 			
-		var eds = new EstacionDeServicio()
-		var d1 = new Destino(position=game.at(7,7))
-		var p1 = new Pasajero(dineroDisponible=20,destino = d1)
+		var eds = new EstacionDeServicio(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)))
+		
+		var d1 = new Destino(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)))
+		
+		var p1 = new Pasajero(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)),dineroDisponible=20,destino = d1)
+		
+		
+		var d2 = new Destino(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)))
+		
+		var p2 = new Pasajero(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)),dineroDisponible=60,destino = d2)
+		
+		
+		var d3 = new Destino(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)))
+		
+		var p3 = new Pasajero(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)),dineroDisponible=50,destino = d3)
+		
+		
+		var d4 = new Destino(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)))
+		
+		var p4 = new Pasajero(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)),dineroDisponible=40,destino = d4)
 
 		
 		game.addVisual(stats)
 		
-		//self.crearPasajero(5,6, 7,d2)
 		
-		//self.cargarElementos()
 		game.addVisual(eds)
 		game.addVisual(p1)
 		game.addVisual(d1)
+		
+		game.addVisual(p2)
+		game.addVisual(d2)
+		
+		game.addVisual(p3)
+		game.addVisual(d3)
+		
+		game.addVisual(p4)
+		game.addVisual(d4)
+
+
 
 		game.addVisualCharacter(autoJugador)
 
 		game.showAttributes(autoJugador)
 
-		
 		game.addVisual(autoPrueba)
 		
 		colisiones.configurar()	
@@ -187,22 +180,6 @@ object nivel1 inherits Nivel(siguienteNivel = nivel2){
 	
 	
 	
-	/* 
-	method noHayPasajeros(){
-		return game.removeVisual(p1)
-	}*/
-	
-	
-	
-
-	/* 
-	//Elimina los objetos del nivel actual y ejecuta el siguiente
-	method avanzarA() {
-		
-		if (self.noHayPasajeros()) {
-			nivel2.inicio()
-		}
-	}*/
 	
 	
 }
@@ -217,19 +194,66 @@ object nivel2 inherits Nivel(siguienteNivel = nivel3){
 		super()
 		
 			
-		const esd = new EstacionDeServicio()
-		const d2 = new Destino(position=game.at(8,8))
-		const p2 = new Pasajero(position=game.at(2,3),dineroDisponible=50,destino = d2)
+		var eds = new EstacionDeServicio(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)))
+		
+		var d1 = new Destino(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)))
+		
+		var p1 = new Pasajero(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)),dineroDisponible=30,destino = d1)
+		
+		
+		var d2 = new Destino(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)))
+		
+		var p2 = new Pasajero(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)),dineroDisponible=90,destino = d2)
+		
+		
+		var d3 = new Destino(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)))
+		
+		var p3 = new Pasajero(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)),dineroDisponible=50,destino = d3)
+		
+		
+		var d4 = new Destino(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)))
+		
+		var p4 = new Pasajero(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)),dineroDisponible=30,destino = d4)
+		
+		
+		
+		var d5 = new Destino(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)))
+		
+		var p5 = new Pasajero(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)),dineroDisponible=40,destino = d5)
+		
+		
+		var d6 = new Destino(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)))
+		
+		var p6 = new Pasajero(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)),dineroDisponible=60,destino = d6)
+
 		
 		game.addVisual(stats)
 		
-		game.addVisual(esd)
+		
+		game.addVisual(eds)
+		game.addVisual(p1)
+		game.addVisual(d1)
+		
 		game.addVisual(p2)
 		game.addVisual(d2)
+		
+		game.addVisual(p3)
+		game.addVisual(d3)
+		
+		game.addVisual(p4)
+		game.addVisual(d4)
+		
+		
+		game.addVisual(p5)
+		game.addVisual(d5)
+		
+		game.addVisual(p6)
+		game.addVisual(d6)
+		
+		
 		game.addVisualCharacter(autoJugador)
 		game.showAttributes(autoJugador)
-		game.showAttributes(p2)
-		game.showAttributes(d2)
+
 		game.addVisual(autoPrueba)
 		
 		colisiones.configurar()	
@@ -251,15 +275,105 @@ object nivel3 inherits Nivel(siguienteNivel = creditos){
 		super()
 		
 			
-		const esd = new EstacionDeServicio()
-		const d2 = new Destino(position=game.at(8,8))
-		const p2 = new Pasajero(position=game.at(2,3),dineroDisponible=50,destino = d2)
+					
+		var eds = new EstacionDeServicio(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)))
+		
+		var d1 = new Destino(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)))
+		
+		var p1 = new Pasajero(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)),dineroDisponible=15,destino = d1)
+		
+		
+		var d2 = new Destino(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)))
+		
+		var p2 = new Pasajero(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)),dineroDisponible=50,destino = d2)
+		
+		
+		var d3 = new Destino(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)))
+		
+		var p3 = new Pasajero(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)),dineroDisponible=60,destino = d3)
+		
+		
+		var d4 = new Destino(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)))
+		
+		var p4 = new Pasajero(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)),dineroDisponible=20,destino = d4)
+		
+		
+		
+		var d5 = new Destino(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)))
+		
+		var p5 = new Pasajero(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)),dineroDisponible=31,destino = d5)
+		
+		
+		var d6 = new Destino(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)))
+		
+		var p6 = new Pasajero(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)),dineroDisponible=19,destino = d6)
+
+
+
+
+		var d7 = new Destino(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)))
+		
+		var p7 = new Pasajero(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)),dineroDisponible=17,destino = d7)
+
+
+
+		var d8 = new Destino(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)))
+		
+		var p8 = new Pasajero(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)),dineroDisponible=10,destino = d8)
+
+
+
+
+		var d9 = new Destino(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)))
+		
+		var p9 = new Pasajero(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)),dineroDisponible=70,destino = d9)
+
+
+
+		var d10 = new Destino(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)))
+		
+		var p10 = new Pasajero(position=game.at(0.randomUpTo(game.width()).truncate(0), 0.randomUpTo(game.height()).truncate(0)),dineroDisponible=1,destino = d10)
+
 		
 		game.addVisual(stats)
 		
-		game.addVisual(esd)
+		
+		game.addVisual(eds)
+		game.addVisual(p1)
+		game.addVisual(d1)
+		
 		game.addVisual(p2)
 		game.addVisual(d2)
+		
+		game.addVisual(p3)
+		game.addVisual(d3)
+		
+		game.addVisual(p4)
+		game.addVisual(d4)
+		
+		
+		game.addVisual(p5)
+		game.addVisual(d5)
+		
+		game.addVisual(p6)
+		game.addVisual(d6)
+		
+		
+		game.addVisual(p7)
+		game.addVisual(d7)
+		
+		game.addVisual(p8)
+		game.addVisual(d8)
+		
+		
+		game.addVisual(p9)
+		game.addVisual(d9)
+		
+		game.addVisual(p10)
+		game.addVisual(d10)
+		
+		
+		
 		game.addVisualCharacter(autoJugador)
 		game.showAttributes(autoJugador)
 		game.showAttributes(p2)

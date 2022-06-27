@@ -17,7 +17,7 @@ object autoJugador {
 	
 	method inicializarAuto(){
 		pasosDelPasajeroAlDestino = 0
-		combustible = 20
+		combustible = 50
 		vida = 100
 		gananciasTotales = 0
 		
