@@ -13,7 +13,13 @@ class Pasajero {
 
 	
 	method interactuar(auto){
-		auto.subirPasajero(self)
+		if (auto.pasajeroActual() == null){
+			auto.subirPasajero(self)
+		}else{
+			game.say(auto,"Che, llevame a mi primero")
+		}
+			
+		
 	}
 	
 	method abonarViaje(auto){
@@ -23,14 +29,17 @@ class Pasajero {
 		self.bajarDelAuto()
 	}
 	
-	method personaEnDestino() = nivel1.destinos().any{ undestino => undestino.position() == self.position() }
 	
 	method bajarDelAuto(){
-		self.personaEnDestino()
 		position = destino.position()
 		game.addVisual(self)
+		autoJugador.pasajeroActual(null)
 		game.schedule(2000, {game.removeVisual(self)})
 		game.schedule(2000, {game.removeVisual(destino)})
+	}
+	
+	method estaEnDestino(){
+		return position == destino.position()
 	}
 	
 	
@@ -39,9 +48,9 @@ class Pasajero {
 		if (position != destino.position()) {
 			game.say(self,"
 					¿Uber?") 
-	}if (costoDelUltimoViaje == 0){
+	}if (self.estaEnDestino() and costoDelUltimoViaje == 0){
 		game.say(self,"Dejá, la proxima llamo un remis")
-	}else{
+	}else if (self.estaEnDestino()){
 		game.say(self,"$" + costoDelUltimoViaje + " dice la app, gracias") 
 	}
 }
@@ -49,7 +58,7 @@ class Pasajero {
 }
 
 class Destino{
-	var property image = "null.png"
+	var property image = "caja.png"
 	var property position
 	const property posicionInicial = position
 	
@@ -61,6 +70,10 @@ class Destino{
 	}
 	
 	method interactuar(auto){
-		auto.bajarPasajero(auto.pasajeroActual())
+		if (auto.pasajeroActual().destino() == self){
+			auto.bajarPasajero(auto.pasajeroActual())
+		}
+			game.say(auto,"che yo no vivo acá")
+		
 	}
 }

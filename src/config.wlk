@@ -8,8 +8,6 @@ import Pasajeros.*
 
 object config {
 	//Configuracion de volumen y teclas, además tiene el metodo revisarColision y guarda el nivel actual en el que esta el juego
-	
-	const niveles =[menu,nivel1,nivel2,nivel3]
 
 	method configurarTeclas() {
 		keyboard.up().onPressDo{autoJugador.avanzar("arriba") }
@@ -22,7 +20,7 @@ object config {
 		keyboard.r().onPressDo{self.reiniciarJuego(autoJugador.nivelActual())}
 		
 		
-		keyboard.s().onPressDo{self.pasarDeNivel()}
+		keyboard.enter().onPressDo{self.pasarDeNivel()}
 		
 	}
 	
@@ -67,16 +65,11 @@ class Nivel{
 	const anchoTotal = 15
 	const altoTotal = 15
 	var property siguienteNivel
-	var property pasajeros=[]
-	var property destinos=[]
-	
-	
 
-	
 	method inicio(){
 		
 		game.clear()
-		game.title("El laburante del Uber")
+		game.title("El laburante de Uberto")
 		game.width(anchoTotal)
 		game.height(altoTotal)
 		
@@ -93,6 +86,7 @@ class Nivel{
 	method reiniciar(){
 		self.inicio()
 		self.reiniciarPosiciones()
+		//autoParado.position(autoJugador.position())
 		autoJugador.inicializarAuto()
 	}
 	

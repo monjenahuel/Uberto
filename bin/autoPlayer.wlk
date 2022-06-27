@@ -20,6 +20,7 @@ object autoJugador {
 		combustible = 50
 		vida = 100
 		gananciasTotales = 0
+		pasajeroActual = null
 		
 	}
 
@@ -30,9 +31,9 @@ object autoJugador {
 			game.removeVisual(self)
 			game.addVisual(autoParado)
 			game.addVisual(gameOver)
-			autoParado.error("Uh, me quedé sin nafta")
+			game.say(autoParado,"Uh, me quedé sin nafta")
 			
-			game.schedule(2000, {game.stop()})	
+			game.schedule(10000, {game.stop()})	
 			
 
 		}
@@ -110,8 +111,8 @@ object autoJugador {
 
 object autoParado{
 	var property image = autoJugador.image()
-	const property position = self.positionAParar()
-	
+	var property position = self.positionAParar()
+	const property posicionInicial = position
 	
 	
 	method positionAParar(){
