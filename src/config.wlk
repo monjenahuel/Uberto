@@ -50,7 +50,7 @@ object colisiones{
 	
 	
 	method configurar(){
-		game.onCollideDo(autoJugador, { e => game.say(e, e.mensaje())})
+		game.onCollideDo(autoJugador, { e => e.mensaje()})
 		game.onTick(1000, "movimiento", { autoPrueba.movete() })
 	}
 	

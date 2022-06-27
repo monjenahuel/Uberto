@@ -37,12 +37,12 @@ class Pasajero {
 	
 	method mensaje(){
 		if (position != destino.position()) {
-			return "
-					¿Uber?"
+			game.say(self,"
+					¿Uber?") 
 	}if (costoDelUltimoViaje == 0){
-		return "Dejá, la proxima llamo un remis"
+		game.say(self,"Dejá, la proxima llamo un remis")
 	}else{
-		return "$" + costoDelUltimoViaje + " dice la app, gracias"
+		game.say(self,"$" + costoDelUltimoViaje + " dice la app, gracias") 
 	}
 }
 
@@ -58,7 +58,6 @@ class Destino{
 	}
 	
 	method mensaje(){
-		return "Viaje completado"
 	}
 	
 	method interactuar(auto){

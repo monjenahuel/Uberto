@@ -142,6 +142,8 @@ object stats{
 		return "Nafta: " + autoJugador.combustible() + "    " + "Dinero: " + autoJugador.gananciasTotales()
 		+ "  " + "Vida: " + autoJugador.vida()
 		
+	method mensaje(){}
+		
 	
 	
 }
@@ -166,12 +168,12 @@ object autoPrueba{
     	}
     	
     method mensaje(){
+    	var frases = ["Eu tené cuidado", "¿Quien te enseño a manejar?", "Me chocaste!!", "Más vale que tengas seguro"]
+    	
     	if (autoJugador.chocaConAuto()){
-			return "Me chocaste con el auto, tu vida total es " + (autoJugador.vida() -10)
-		}else{
-			return ""
+			game.say(self,frases.anyOne()) 
 		}
-		}
+	}
   }
 
 

@@ -19,9 +19,9 @@ class EstacionDeServicio {
 	
 	method mensaje(){
 		if (autoJugador.gananciasTotales()>0){
-			return "Presiona Z para cargar combustible"
+			game.say(self,"Presiona Z para cargar combustible") 
 		}else{
-			return "Not enough cash, stranger"
+			game.say(self,"Not enough cash, stranger") 
 		}
 	}
 	
