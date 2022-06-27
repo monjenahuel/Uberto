@@ -104,15 +104,13 @@ class Nivel{
 
 object menu inherits Nivel(siguienteNivel = nivel1){
 	
-	method image() = "caja.png"
-	method position() = game.center()
+	var property image = "Menu.png"
+	var property position = game.origin()
 	
 	override method inicio(){
 		super()
-		
 		game.addVisual(self)
 	}
-	
 	
 	
 }
