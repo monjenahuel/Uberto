@@ -1,1 +1,1 @@
-# ¿Queres ganar $180.000 por mes?
+# El juego en el que la nafta nunca es suficiente
